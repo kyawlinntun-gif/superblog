@@ -77,14 +77,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="card">
-                <div class="card-header bg-white">
-                    Start creating your amazing application!
-                </div>
-                <div class="card-footer">
-                    Footer
-                </div>
-            </div>
+            <admin-main></admin-main>
         </section>
         <!-- /.content -->
     </div>
