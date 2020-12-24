@@ -35,30 +35,30 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-close">
-                        <a href="#" class="nav-link active">
+                        <router-link to="/home" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
                                 <i class="right fas fa-angle-left"></i>
                             </p>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <router-link to="category-list" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Category
                             </p>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <router-link to="/post" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Post
                                 <span class="right badge badge-danger">New</span>
                             </p>
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
             </nav>
@@ -68,12 +68,12 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper h6">
-        <!-- Content Header (Page header) -->
+    <div class="content-wrapper h6 pt-5">
+        {{-- <!-- Content Header (Page header) -->
         <div class="content-header">
             <h1>Title</h1>
         </div>
-        <!-- /.content-header -->
+        <!-- /.content-header --> --}}
 
         <!-- Main content -->
         <section class="content">
