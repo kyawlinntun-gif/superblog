@@ -12,12 +12,13 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" @submit.prevent="addCategory">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="new-category">New Category</label>
                                     <input type="text" class="form-control" id="new-category"
-                                        placeholder="Type New Category">
+                                        placeholder="Type New Category" v-model="form.cat_name" name="cat_name" :class="{ 'is-invalid': form.errors.has('cat_name') }">
+                                    <has-error :form="form" field="cat_name"></has-error>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -36,3 +37,28 @@
     </section>
     <!-- /.content -->
 </template>
+
+<script>
+export default {
+    name: 'New',
+    data() {
+        return {
+            form: new Form({
+                cat_name: ''
+            })
+        }
+    },
+    methods: {
+        addCategory() {
+            // Submit the form via a POST request
+            this.form.post('/category/add')
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(errors => {
+                    console.log(errors);
+                });
+        }
+    }
+}
+</script>

@@ -15,6 +15,13 @@ const router = new VueRouter({
     mode: 'history'
 })
 
+// v-from
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form;
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 const app = new Vue({
     router,
     el: '#app',
