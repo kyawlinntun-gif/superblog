@@ -11,7 +11,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'cat_name' => 'required|string|min:2|max:50'
-            // 'cat_name' => 'required|regex:/^\w{2,50}$/'
+            // 'cat_name' => 'required|regex:/^\w{2,50}$/g'
         ]);
 
         $category = new Category();

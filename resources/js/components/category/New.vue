@@ -53,6 +53,15 @@ export default {
             // Submit the form via a POST request
             this.form.post('/category/add')
                 .then(response => {
+
+                    this.$router.push('/category-list');
+
+                    // Toast
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Category added successfully'
+                    });
+
                     console.log(response);
                 })
                 .catch(errors => {
