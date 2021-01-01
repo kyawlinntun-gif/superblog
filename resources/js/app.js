@@ -9,9 +9,9 @@ Vue.use(Vuex)
 
 import storeData from './store/index.js';
 
-const store = new Vuex.Store({
+const store = new Vuex.Store(
     storeData
-})
+)
 
 
 Vue.component('admin-main', require('./components/admin/AdminMaster.vue').default);
@@ -23,8 +23,8 @@ import routes from './routes'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-    routes, // short for `routes: routes`
-    mode: 'history'
+    routes, // short for `routes: routes`,
+    // mode: 'history'
 })
 
 // v-from
@@ -55,6 +55,9 @@ const Toast = Swal.mixin({
 })
 
 window.Toast = Toast;
+
+// Filter 
+import {filter} from './filter';
 
 const app = new Vue({
     router,

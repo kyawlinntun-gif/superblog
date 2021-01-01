@@ -15,14 +15,16 @@
                                     <tr>
                                         <th>SI</th>
                                         <th>Category Name</th>
+                                        <th>Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Category Name</td>
-                                        <td class="d-flex"><button class="btn btn-primary">Edit</button><button class="btn btn-primary ml-2">Delete</button></td>
+                                    <tr v-for="(category, index) in getAllCategory" :key="category.id">
+                                        <td>{{ index + 1 }}</td>
+                                        <td>{{ category.name }}</td>
+                                        <td>{{ category.created_at | timeFormat }}</td>
+                                        <td class="d-flex"><router-link :to="`/edit-category/${category.id}`" class="btn btn-sm btn-primary">Edit</router-link><button class="btn btn-sm btn-primary ml-2" @click.prevent="deleteCategory(category.id)">Delete</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -39,3 +41,37 @@
     </section>
     <!-- /.content -->
 </template>
+
+<script>
+export default {
+    name: 'List',
+    mounted() {
+        this.$store.dispatch('allCategory')
+    },
+    computed: {
+        getAllCategory() {
+            return this.$store.getters.getCategory;
+        }
+    },
+    methods: {
+        deleteCategory(id) {
+            axios.delete(`/category/${id}`)
+                    .then(response => {
+
+                        // allCategory
+                        this.$store.dispatch('allCategory');
+
+                        // Toast
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Category deleted successfully'
+                        });
+
+                    })
+                    .catch(errors => {
+                        console.log(errors);
+                    })
+        }
+    }
+}
+</script>

@@ -19,6 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Category
+Route::get('/category', 'CategoryController@index');
+Route::post('/category/add', 'CategoryController@store');
+Route::get('/category/{id}', 'CategoryController@show');
+Route::put('/category/{id}', 'CategoryController@update');
+Route::delete('/category/{id}', 'CategoryController@destory');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/{anypath}', 'HomeController@index')->where('path', '\w*');
@@ -26,5 +34,4 @@ Route::get('/{anypath}', 'HomeController@index')->where('path', '\w*');
 // PostController
 // Route::get('/post', 'PostController@index')->name('post.index');
 
-// Category
-Route::post('/category/add', 'CategoryController@store');
+
