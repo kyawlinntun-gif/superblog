@@ -26,12 +26,14 @@ Route::get('/category/{id}', 'CategoryController@show');
 Route::put('/category/{id}', 'CategoryController@update');
 Route::delete('/category/{id}', 'CategoryController@destory');
 
+// PostController
+Route::get('/post', 'PostController@index')->name('post.index');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/{anypath}', 'HomeController@index')->where('path', '\w*');
 
-// PostController
-// Route::get('/post', 'PostController@index')->name('post.index');
+
 
 

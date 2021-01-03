@@ -20,7 +20,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(category, index) in getAllCategory" :key="category.id">
+                                    <tr v-for="(category, index) in getAllCategories" :key="category.id">
                                         <td>{{ index + 1 }}</td>
                                         <td>{{ category.name }}</td>
                                         <td>{{ category.created_at | timeFormat }}</td>
@@ -49,7 +49,7 @@ export default {
         this.$store.dispatch('allCategory')
     },
     computed: {
-        getAllCategory() {
+        getAllCategories() {
             return this.$store.getters.getCategory;
         }
     },
