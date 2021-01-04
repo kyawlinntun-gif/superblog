@@ -12,7 +12,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" @submit.prevent="addPost">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="title">Add New Post</label>
@@ -24,16 +24,17 @@
                                 <div class="form-group">
                                     <label for="description">Add New Description</label>
                                     <markdown-editor height="auto" v-model="form.description"></markdown-editor>
-                                    <has-error :form="form" field="description"></has-error>
+                                    <span v-if="form.errors.has('description')" class="text-danger">{{ form.errors.get('description') }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="category">Category</label>
                                     <select id="category" class="form-control form-select form-select-lg mb-3"
-                                        aria-label=".form-select-lg example" v-model="form.cat_id">
+                                        aria-label=".form-select-lg example" v-model="form.cat_id" name="cat_id">
                                         <option selected disabled value="">Select One</option>
                                         <option v-for="(category, index) in getAllCategories" :key="index"
                                             :value="category.id">{{ category.name }}</option>
                                     </select>
+                                    <span v-if="form.errors.has('cat_id')" class="text-danger">{{ form.errors.get('cat_id') }}</span>
                                 </div>
                                 <div class="form-group">
                                     <input type="file" id="photo" name="photo"
@@ -84,13 +85,53 @@
         methods: {
             changePhoto(event) {
                 var file = event.target.files[0];
-                var reader = new FileReader();
-                reader.onload = event => {
-                    // The file's text will be printed here
-                    this.form.photo = event.target.result;
-                };
+                // console.log(file.size, file.type);
+                // console.log(file);
 
-                reader.readAsDataURL(file);
+                if (file.size > 1048576) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Image Size',
+                            text: 'Image Size Wrong!',
+                        })
+                }
+                else if(!(file.type === 'image/jpeg' || file.type === 'image/png'))
+                {
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Image Type',
+                            text: 'Image Type Wrong!',
+                        })
+                }
+                else
+                {
+                    var reader = new FileReader();
+                    reader.onload = event => {
+                        // The file's text will be printed here
+                        this.form.photo = event.target.result;
+                        // console.log(this.form.photo);
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            },
+            addPost() {
+                this.form.post('/post')
+                        .then(response => {
+                            // console.log(response);
+
+                            this.$router.push('/post-list');
+
+                            // Toast
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Post added successfully'
+                            });
+
+                        })
+                        .catch(errors => {
+                            console.log(errors);
+                        });
             }
         }
     }

@@ -28,6 +28,9 @@ Route::delete('/category/{id}', 'CategoryController@destory');
 
 // PostController
 Route::get('/post', 'PostController@index')->name('post.index');
+Route::post('/post', 'PostController@store')->name('post.store');
+Route::get('/post/{id}', 'PostController@show')->name('post.show');
+Route::delete('/post/{id}', 'PostController@destroy')->name('post.destroy');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

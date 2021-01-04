@@ -42,6 +42,8 @@ Vue.component(AlertError.name, AlertError)
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
 
+window.Swal = Swal;
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',

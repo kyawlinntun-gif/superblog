@@ -29,8 +29,8 @@
                                         <td>{{ post.category ? post.category.name : null }}</td>
                                         <td>{{ post.title | sortLength(20, "---") }}</td>
                                         <td>{{ post.description | sortLength(40, "...") }}</td>
-                                        <td><img :src="post.photo" alt="" width="40" height="50"></td>
-                                        <td class="d-flex"><a class="btn btn-sm btn-primary">Edit</a><button class="btn btn-sm btn-primary ml-2" @click.prevent="">Delete</button></td>
+                                        <td><img :src="ourImage(post.photo)" alt="" width="40" height="50"></td>
+                                        <td class="d-flex"><router-link :to="`/edit-post/${post.id}`" class="btn btn-sm btn-primary">Edit</router-link><button class="btn btn-sm btn-primary ml-2" @click.prevent="deletePost(post.id)">Delete</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -57,6 +57,31 @@ export default {
     computed: {
         getAllPosts() {
             return this.$store.getters.getPost;
+        }
+    },
+    methods: {
+        ourImage(image)
+        {
+            return 'uploadimage/' + image;
+        },
+        deletePost(postId)
+        {
+            axios.delete('/post/'+ postId)
+                .then(response => {
+                    
+                    // allCategory
+                    this.$store.dispatch('allPost');
+
+                    // Toast
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Post deleted successfully'
+                    });
+
+                })
+                .catch(errors => {
+                    console.log(errors);
+                })
         }
     }
 }
